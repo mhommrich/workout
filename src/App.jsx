@@ -7,6 +7,7 @@ function App() {
   return (
     <>
       <h1>Today's Workout:</h1>
+      <p>Chest</p>
       <div className="body">
         {!inProgress &&
           <button onClick={() => setInProgress(true)}>
