@@ -1,13 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios';
 import './App.css'
+import { getMuscleList } from './hooks/getMuscleList';
+import { getExercisesDB } from './adapters/api';
 
 function App() {
-  const [inProgress, setInProgress] = useState(false)
-
+  const [inProgress, setInProgress] = useState(false);
+  const [targetMuscle, setTargetMuscle] = useState(null);
+  let dbURL = 'http://localhost:8080/exercises';
+  let muscleList;
+  
+  const getTargetMuscle = async () => {
+    const dbRaw = await getExercisesDB(dbURL);
+    muscleList = getMuscleList(dbRaw);
+    const randomIndex = Math.floor(Math.random() * muscleList.length);
+    setTargetMuscle(muscleList[randomIndex]);
+  };
   return (
     <>
-      <h1>Today's Workout:</h1>
-      <p>Chest</p>
+      <h1>Workout Buddy</h1>
+      {targetMuscle && <h2>{targetMuscle}</h2>}
+      {!inProgress && <button onClick={getTargetMuscle}>Set Random Target Muscle</button>}
       <div className="body">
         {!inProgress &&
           <button onClick={() => setInProgress(true)}>
