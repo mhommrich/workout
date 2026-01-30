@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios';
 import './App.css'
 import { getMuscleList } from './hooks/getMuscleList';
 import { getExercisesDB } from './adapters/api';
@@ -11,8 +10,8 @@ function App() {
   let muscleList;
   
   const getTargetMuscle = async () => {
-    const dbRaw = await getExercisesDB(dbURL);
-    muscleList = getMuscleList(dbRaw);
+    const dbRaw = await getExercisesDB(dbURL)
+    const muscleList = getMuscleList(dbRaw);
     const randomIndex = Math.floor(Math.random() * muscleList.length);
     setTargetMuscle(muscleList[randomIndex]);
   };
