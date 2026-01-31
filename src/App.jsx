@@ -55,6 +55,9 @@ function App() {
             Start workout
           </button>
         }
+        {inProgress && targetMuscle === "Wet Diaper" &&
+          <h2>Ha! What a lil diaper cuck!</h2>
+        }
         {inProgress &&
           <button onClick={() => setInProgress(false)}>
             End workout
